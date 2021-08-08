@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.indexes import GinIndex
 
 # Create your models here.
 class YoutubeData(models.Model):
@@ -13,3 +14,5 @@ class YoutubeData(models.Model):
 	class Meta:
 		app_label = 'youtube_api'
 		db_table = 'youtube'
+		indexes = [GinIndex(name='title_desc_gin_index', fields=['title', 'description'], opclasses=['gin_trgm_ops', 'gin_trgm_ops'])]
+

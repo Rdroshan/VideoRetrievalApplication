@@ -20,5 +20,6 @@ from youtube_api import views as youtube_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('get-videos/', youtube_views.get_all_videos_data, name='list_videos'),
+    path('search-videos/', youtube_views.search_videos, name='seach_videos_with_title_desc'),
     path('fetch-store-videos/', youtube_views.cron_fetch_and_store, name='cron_fetch_and_store')
 ]

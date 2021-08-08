@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'youtube_api',
     'django_cron',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [

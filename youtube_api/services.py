@@ -1,5 +1,6 @@
 # django and python imports
 from django.conf import settings
+from django.db.models import Q
 import requests
 from dateutil import parser
 from django.db import IntegrityError
@@ -19,6 +20,13 @@ class YoutubeService:
 		youtube_videos_data = YoutubeData.objects.all().order_by('-published_at')
 		return youtube_videos_data
 
+	@staticmethod
+	def get_videos(title_desc_search):
+
+		or_query_creation = Q()
+		for search_query in title_desc_search.split(' '):
+			or_query_creation |= Q(title__icontains=search_query) | Q(description__icontains=search_query)
+		return YoutubeData.objects.filter(or_query_creation)
 
 	@staticmethod
 	def fetch_videos_and_store():
