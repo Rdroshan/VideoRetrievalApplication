@@ -74,6 +74,6 @@ The application is accessible at localhost:8000
     By using `GinIndex` as it indexes the composite values from title and description and the part of the queries are searched through these composite values in index.
 
   
-    If admin dashboard contained filters then we can have indexes based on those filter fields like: video_id, channel_id
+    If admin dashboard contained filters(not present in the current application) then we can have indexes based on those filter fields like: video_id, channel_id
   
     NOTE: If `search_query` is not passed then it will return the same result as `get-videos`
