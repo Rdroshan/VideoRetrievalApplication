@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'youtube_api',
-    'django_cron',
     'django.contrib.postgres',
 ]
 
@@ -52,10 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-CRON_CLASSES = [
-    'youtube_api.cron.YoutubeJob'
 ]
 
 ROOT_URLCONF = 'api.urls'
