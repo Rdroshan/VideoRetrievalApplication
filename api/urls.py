@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from youtube_api import views as youtube_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('get-videos/', youtube_views.get_all_videos_data, name='list_videos'),
+    path('fetch-store-videos/', youtube_views.cron_fetch_and_store, name='cron_fetch_and_store')
 ]
