@@ -76,4 +76,4 @@ The application is accessible at localhost:8000
   
     If admin dashboard contained filters(not present in the current application) then we can have indexes based on those filter fields like: video_id, channel_id
   
-    NOTE: If `search_query` is not passed then it will return the same result as `get-videos`
+    NOTE: If `search_query` is not passed then it will return the same result as `videos` api.
