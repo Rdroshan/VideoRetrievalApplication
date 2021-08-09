@@ -61,7 +61,7 @@ python manage.py createsuperuser
 The application is accessible at localhost:8000
 
 ## APIs exposed
-1. `get-videos` - Gets videos stored in the db in reverse chronological order of publishedAt date time.
+1. `videos` - Gets videos stored in the db in reverse chronological order of publishedAt date time.
   
     Response contains: title, published_at, description and thumbnail_urls
 
