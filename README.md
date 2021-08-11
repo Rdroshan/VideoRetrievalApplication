@@ -16,6 +16,11 @@ pip install -r ../requirements/requirements.txt
 eg:
 ```bash
 export GOOGLE_API_KEYS="key1,key2"
+export SECRET_KEY="abc"
+export DB_USER=""
+export DB_NAME="videoapi"
+export DB_PASS=""
+export DB_HOST="localhost"
 # save and then run
 source variables.sh
 ```
@@ -66,6 +71,14 @@ python manage.py createsuperuser
 2. clone this repo
 3. Then `cd video-api` and Edit the variables.sh file. 
 Here put your environment variables like Google API keys etc.
+```bash
+export SECRET_KEY="abc"
+export GOOGLE_API_KEYS="key1,key2"
+export DB_USER="videoapi_user"
+export DB_NAME="videoapi"
+export DB_PASS="1234"
+export DB_HOST="db" # MANDATORY: this needs to be "db" else we need to make a change in docker-compose file
+```
 4. it's time to create docker image and run your container.
 ```bash
 docker-compose up -d --build
