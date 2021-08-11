@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!#65y5km3^9d600mqno6mpvpc*hht2s60h-^@q4ic9n1w*__+d'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -80,7 +80,11 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'videoapi',
+        'USER': os.getenv('DB_USER', 'videoapi_user'),
+        'NAME': os.getenv('DB_NAME', 'videoapi'),
+        'PASSWORD': os.getenv('DB_PASS', '1234'),
+        'PORT': int(os.getenv('DB_PORT', '5432')),
+        'HOST': os.getenv('DB_HOST', 'db'),
     }
 }
 
@@ -128,7 +132,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-GOOGLE_API_KEYS = list(os.getenv('GOOGLE_API_KEYS', 'AIzaSyCPB7ZlTO7rtfSz0wzZOeHkuhfOi9EzIwE').split(','))
+GOOGLE_API_KEYS = list(os.getenv('GOOGLE_API_KEYS', '').split(','))
 
 
 LOGGING = {
