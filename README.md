@@ -40,9 +40,10 @@ python manage.py migrate
 9. Setup the cron
 ```bash
 crontab -e
-# opens vi editor(or whatever is set as default)
-# enter this command in the editor and save it(:wq)
+# opens vi editor(or whichever is set as default)
+# enter this command in the editor and save it(:wq) [Make sure to leave a new line at EOF else cron will not run]
 */5 * * * * curl --request POST http://localhost:8000/fetch-store-videos/
+
 ```
 You'll get a confirmation that your cron is set.
   
@@ -57,11 +58,37 @@ python manage.py runserver # runs on port 8000
 ```bash
 python manage.py createsuperuser
 ```
+**The application is accessible at localhost:8000**
 
-The application is accessible at localhost:8000
+
+## Installation using docker
+1. Install docker by clicking [here](https://docs.docker.com/get-docker/)
+2. clone this repo
+3. Then `cd video-api` and Edit the variables.sh file. 
+Here put your environment variables like Google API keys etc.
+4. it's time to create docker image and run your container.
+```bash
+docker-compose up -d --build
+```
+5. Now we have to create a cron job that will hit the API `fetch-store-videos` repeatedly after 2 minutes and store the latest 5 records in DB. 
+  
+    NOTE:     Make sure to install cron job if not present. The below steps are for Linux based systems.
+```bash
+>>crontab -e
+# Editor will open, Copy paste the below cron instruction
+*/2 * * * * curl --request POST http://localhost:8000/fetch-store-videos/
+
+# Make sure to leave a newline else cron will not run
+# save the changes and provide the password to confirm and Now the cron is up and running.
+```
+To check whether cron is running or not you can either log inside the container and check the logs at `/tmp/debug.log` or directly check in the host machine `pgrep -u root cron` as cron is being run with root permissions.
+Note: To stop the cron just comment out the line which we typed after executing the command `crontab -e`
+
+**The application is accessible at localhost:8000**
 
 ## APIs exposed
-1. `get-videos` - Gets videos stored in the db in reverse chronological order of publishedAt date time.
+I've used search query `sports` for getting videos from youtube.
+1. `videos` - Gets videos stored in the db in reverse chronological order of publishedAt date time.
   
     Response contains: title, published_at, description and thumbnail_urls
 
@@ -74,6 +101,6 @@ The application is accessible at localhost:8000
     By using `GinIndex` as it indexes the composite values from title and description and the part of the queries are searched through these composite values in index.
 
   
-    If admin dashboard contained filters then we can have indexes based on those filter fields like: video_id, channel_id
+    If admin dashboard contained filters(not present in the current application) then we can have indexes based on those filter fields like: video_id, channel_id
   
-    NOTE: If `search_query` is not passed then it will return the same result as `get-videos`
+    NOTE: If `search_query` is not passed then it will return the same result as `videos` API.
