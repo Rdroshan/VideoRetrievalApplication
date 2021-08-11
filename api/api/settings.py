@@ -83,7 +83,6 @@ DATABASES = {
         'USER': os.getenv('DB_USER', 'videoapi_user'),
         'NAME': os.getenv('DB_NAME', 'videoapi'),
         'PASSWORD': os.getenv('DB_PASS', '1234'),
-        'PORT': int(os.getenv('DB_PORT', '5432')),
         'HOST': os.getenv('DB_HOST', 'db'),
     }
 }

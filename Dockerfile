@@ -13,6 +13,9 @@ COPY variables.sh /video_api/
 #COPY crontab /etc/cron.d/cron-tab
 #RUN chmod 0644 /etc/cron.d/cron-tab
 
+# Create file for logging
+RUN touch /tmp/debug.log
+
 # set work directory
 WORKDIR /video_api/
 
