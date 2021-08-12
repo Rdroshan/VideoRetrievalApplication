@@ -7,7 +7,7 @@ RUN mkdir /video_api
 # copy the current directory contents make sure to be in root directory
 COPY requirements.txt  /video_api/
 COPY api /video_api/api/
-COPY variables.sh /video_api/
+#COPY variables.sh /video_api/
 
 # Cron setup
 #COPY crontab /etc/cron.d/cron-tab

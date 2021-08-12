@@ -3,8 +3,6 @@ version: "3.7"
 services:
   db:
     image: postgres:11
-    env_file:
-      - variables.sh
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
@@ -13,7 +11,7 @@ services:
       - "5432:5432"
   web:
     build: .
-    tty: true
+    restart: always
     command: bash -c "cd api && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
