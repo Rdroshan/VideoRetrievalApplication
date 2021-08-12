@@ -69,7 +69,7 @@ python manage.py createsuperuser
 ## Installation using docker
 1. Install docker by clicking [here](https://docs.docker.com/get-docker/)
 2. clone this repo
-3. Then `cd video-api` and Edit the variables.sh file. 
+3. Then `cd video-api` and Edit the variables.sh file and source it.
 Here put your environment variables like Google API keys etc.
 ```bash
 export SECRET_KEY="abc"
@@ -79,10 +79,18 @@ export DB_NAME="videoapi"
 export DB_PASS="1234"
 export DB_HOST="db" # MANDATORY: this needs to be "db" else we need to make a change in docker-compose file
 ```
+
+```bash
+source variables.sh
+```
+
+  Sourcing is required as postgres container uses environment variables from shell.
+ 
 4. it's time to create docker image and run your container.
 ```bash
 docker-compose up -d --build
 ```
+
 5. Now we have to create a cron job that will hit the API `fetch-store-videos` repeatedly after 2 minutes and store the latest 5 records in DB. 
   
     NOTE:     Make sure to install cron job if not present. The below steps are for Linux based systems.
